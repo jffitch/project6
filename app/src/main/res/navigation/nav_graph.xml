@@ -7,33 +7,57 @@
               android:name="com.mathgeniusguide.project6.VeryHappy"
               android:label="VeryHappy"
               tools:layout="@layout/veryhappy">
-        <action android:id="@+id/action_veryhappy_to_happy" app:destination="@id/happy"/>
+        <action android:id="@+id/action_veryhappy_to_happy"
+                app:destination="@id/happy"
+                app:enterAnim="@anim/push_up_in"
+                app:exitAnim="@anim/push_up_out"/>
     </fragment>
     <fragment android:id="@+id/happy"
               android:name="com.mathgeniusguide.project6.Happy"
               android:label="Happy"
               tools:layout="@layout/happy">
-        <action android:id="@+id/action_happy_to_veryhappy" app:destination="@id/veryhappy"/>
-        <action android:id="@+id/action_happy_to_neutral" app:destination="@id/neutral"/>
+        <action android:id="@+id/action_happy_to_veryhappy"
+                app:destination="@id/veryhappy"
+                app:enterAnim="@anim/push_down_in"
+                app:exitAnim="@anim/push_down_out"/>
+        <action android:id="@+id/action_happy_to_neutral"
+                app:destination="@id/neutral"
+                app:enterAnim="@anim/push_up_in"
+                app:exitAnim="@anim/push_up_out"/>
     </fragment>
     <fragment android:id="@+id/neutral"
               android:name="com.mathgeniusguide.project6.Neutral"
               android:label="Neutral"
               tools:layout="@layout/neutral">
-        <action android:id="@+id/action_neutral_to_happy" app:destination="@id/happy"/>
-        <action android:id="@+id/action_neutral_to_sad" app:destination="@id/sad"/>
+        <action android:id="@+id/action_neutral_to_happy"
+                app:destination="@id/happy"
+                app:enterAnim="@anim/push_down_in"
+                app:exitAnim="@anim/push_down_out"/>
+        <action android:id="@+id/action_neutral_to_sad"
+                app:destination="@id/sad"
+                app:enterAnim="@anim/push_up_in"
+                app:exitAnim="@anim/push_up_out"/>
     </fragment>
     <fragment android:id="@+id/sad"
               android:name="com.mathgeniusguide.project6.Sad"
               android:label="Sad"
               tools:layout="@layout/sad">
-        <action android:id="@+id/action_sad_to_neutral" app:destination="@id/neutral"/>
-        <action android:id="@+id/action_sad_to_verysad" app:destination="@id/verysad"/>
+        <action android:id="@+id/action_sad_to_neutral"
+                app:destination="@id/neutral"
+                app:enterAnim="@anim/push_down_in"
+                app:exitAnim="@anim/push_down_out"/>
+        <action android:id="@+id/action_sad_to_verysad"
+                app:destination="@id/verysad"
+                app:enterAnim="@anim/push_up_in"
+                app:exitAnim="@anim/push_up_out"/>
     </fragment>
     <fragment android:id="@+id/verysad"
               android:name="com.mathgeniusguide.project6.VerySad"
               android:label="VerySad"
               tools:layout="@layout/verysad">
-        <action android:id="@+id/action_verysad_to_sad" app:destination="@id/sad"/>
+        <action android:id="@+id/action_verysad_to_sad"
+                app:destination="@id/sad"
+                app:enterAnim="@anim/push_down_in"
+                app:exitAnim="@anim/push_down_out"/>
     </fragment>
 </navigation>
