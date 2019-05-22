@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph" app:startDestination="@id/veryhappy">
+
+    <fragment android:id="@+id/veryhappy"
+              android:name="com.mathgeniusguide.project6.VeryHappy"
+              android:label="VeryHappy"
+              tools:layout="@layout/veryhappy">
+        <action android:id="@+id/action_veryhappy_to_happy" app:destination="@id/happy"/>
+    </fragment>
+    <fragment android:id="@+id/happy"
+              android:name="com.mathgeniusguide.project6.Happy"
+              android:label="Happy"
+              tools:layout="@layout/happy">
+        <action android:id="@+id/action_happy_to_veryhappy" app:destination="@id/veryhappy"/>
+        <action android:id="@+id/action_happy_to_neutral" app:destination="@id/neutral"/>
+    </fragment>
+    <fragment android:id="@+id/neutral"
+              android:name="com.mathgeniusguide.project6.Neutral"
+              android:label="Neutral"
+              tools:layout="@layout/neutral">
+        <action android:id="@+id/action_neutral_to_happy" app:destination="@id/happy"/>
+        <action android:id="@+id/action_neutral_to_sad" app:destination="@id/sad"/>
+    </fragment>
+    <fragment android:id="@+id/sad"
+              android:name="com.mathgeniusguide.project6.Sad"
+              android:label="Sad"
+              tools:layout="@layout/sad">
+        <action android:id="@+id/action_sad_to_neutral" app:destination="@id/neutral"/>
+        <action android:id="@+id/action_sad_to_verysad" app:destination="@id/verysad"/>
+    </fragment>
+    <fragment android:id="@+id/verysad"
+              android:name="com.mathgeniusguide.project6.VerySad"
+              android:label="VerySad"
+              tools:layout="@layout/verysad">
+        <action android:id="@+id/action_verysad_to_sad" app:destination="@id/sad"/>
+    </fragment>
+</navigation>
