@@ -16,4 +16,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/note"
+               android:src="@drawable/ic_note_add_black"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               android:paddingBottom="15dp"
+               android:paddingLeft="15dp"
+               android:visibility="invisible"/>
+
+    <ImageView android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/history"
+               android:src="@drawable/ic_history_black"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               android:paddingBottom="15dp"
+               android:paddingRight="15dp"
+               android:visibility="invisible"/>
 </android.support.constraint.ConstraintLayout>
