@@ -22,6 +22,11 @@ class VeryHappy : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setSwipeListener(view)
+    }
+
     private fun setSwipeListener(view: View) {
         context?.let {
             view.setOnTouchListener(object : OnSwipeTouchListener(it) {
