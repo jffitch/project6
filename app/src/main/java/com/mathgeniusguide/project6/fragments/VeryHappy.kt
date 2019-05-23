@@ -29,17 +29,8 @@ class VeryHappy : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setSwipeListener(view)
-
-        timer = object: CountDownTimer(1000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-
-            }
-            override fun onFinish() {
-                note.visibility = View.VISIBLE
-                history.visibility = View.VISIBLE
-            }
-        }
-        timer.start()
+        iconCountdownTimer()
+        setNoteListener()
     }
 
     private fun setSwipeListener(view: View) {
@@ -47,9 +38,8 @@ class VeryHappy : Fragment() {
             view.setOnTouchListener(object : OnSwipeTouchListener(it) {
                 override fun onSwipeTop() {
                     super.onSwipeTop()
-                    timer.cancel()
-                    note.visibility = View.INVISIBLE
-                    history.visibility = View.INVISIBLE
+                    // move to sadder emotion and cancel countdown timer
+                    cancelTimer()
                     val action = VeryHappyDirections.actionVeryhappyToHappy()
                     Navigation.findNavController(view).navigate(action)
                 }
@@ -63,6 +53,34 @@ class VeryHappy : Fragment() {
                     super.onSwipeRight()
                 }
             })
+        }
+    }
+
+    fun iconCountdownTimer() {
+        timer = object: CountDownTimer(1000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                note.visibility = View.VISIBLE
+                history.visibility = View.VISIBLE
+            }
+        }
+        timer.start()
+    }
+
+    fun cancelTimer() {
+        timer.cancel()
+        note.visibility = View.INVISIBLE
+        history.visibility = View.INVISIBLE
+    }
+
+    fun setNoteListener() {
+        note.setOnClickListener {
+            // move to message screen and cancel countdown timer
+            cancelTimer()
+            val action = VeryHappyDirections.actionVeryhappyToMessage(5)
+            Navigation.findNavController(it).navigate(action)
         }
     }
 

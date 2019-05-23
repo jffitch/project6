@@ -27,6 +27,38 @@ class Happy : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setSwipeListener(view)
+        iconCountdownTimer()
+        setNoteListener()
+    }
+
+    private fun setSwipeListener(view: View) {
+        context?.let {
+            view.setOnTouchListener(object : OnSwipeTouchListener(it) {
+                override fun onSwipeTop() {
+                    super.onSwipeTop()
+                    // move to sadder emotion and cancel countdown timer
+                    cancelTimer()
+                    val action = HappyDirections.actionHappyToNeutral()
+                    Navigation.findNavController(view).navigate(action)
+                }
+                override fun onSwipeBottom() {
+                    super.onSwipeBottom()
+                    // move to happier emotion and cancel countdown timer
+                    cancelTimer()
+                    val action = HappyDirections.actionHappyToVeryhappy()
+                    Navigation.findNavController(view).navigate(action)
+                }
+                override fun onSwipeLeft() {
+                    super.onSwipeLeft()
+                }
+                override fun onSwipeRight() {
+                    super.onSwipeRight()
+                }
+            })
+        }
+    }
+
+    fun iconCountdownTimer() {
         timer = object: CountDownTimer(1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
@@ -39,32 +71,18 @@ class Happy : Fragment() {
         timer.start()
     }
 
-    private fun setSwipeListener(view: View) {
-        context?.let {
-            view.setOnTouchListener(object : OnSwipeTouchListener(it) {
-                override fun onSwipeTop() {
-                    super.onSwipeTop()
-                    timer.cancel()
-                    note.visibility = View.INVISIBLE
-                    history.visibility = View.INVISIBLE
-                    val action = HappyDirections.actionHappyToNeutral()
-                    Navigation.findNavController(view).navigate(action)
-                }
-                override fun onSwipeBottom() {
-                    super.onSwipeBottom()
-                    timer.cancel()
-                    note.visibility = View.INVISIBLE
-                    history.visibility = View.INVISIBLE
-                    val action = HappyDirections.actionHappyToVeryhappy()
-                    Navigation.findNavController(view).navigate(action)
-                }
-                override fun onSwipeLeft() {
-                    super.onSwipeLeft()
-                }
-                override fun onSwipeRight() {
-                    super.onSwipeRight()
-                }
-            })
+    fun cancelTimer() {
+        timer.cancel()
+        note.visibility = View.INVISIBLE
+        history.visibility = View.INVISIBLE
+    }
+
+    fun setNoteListener() {
+        note.setOnClickListener {
+            // move to message screen and cancel countdown timer
+            cancelTimer()
+            val action = HappyDirections.actionHappyToMessage(4)
+            Navigation.findNavController(it).navigate(action)
         }
     }
 
