@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 import com.mathgeniusguide.project6.dao.MoodsDao
 import com.mathgeniusguide.project6.database.AppDatabase
 import com.mathgeniusguide.project6.entity.Moods
+import com.mathgeniusguide.project6.utils.OnSwipeTouchListener
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -44,6 +45,7 @@ class Message : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setEmotionText()
         setListeners()
+        setSwipeListener(view)
     }
 
     fun setEmotionText() {
@@ -69,13 +71,7 @@ class Message : Fragment() {
     fun setListeners() {
         // Go back to the previous screen.
         back.setOnClickListener {
-            val action = when (param1) {
-                1 -> MessageDirections.actionMessageToVerysad()
-                2 -> MessageDirections.actionMessageToSad()
-                4 -> MessageDirections.actionMessageToHappy()
-                5 -> MessageDirections.actionMessageToVeryhappy()
-                else -> MessageDirections.actionMessageToNeutral()
-            }
+            val action = MessageDirections.actionMessageToSelection(param1!!)
             Navigation.findNavController(it).navigate(action)
         }
         save.setOnClickListener {
@@ -90,6 +86,31 @@ class Message : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
             back.callOnClick()
+        }
+    }
+
+    private fun setSwipeListener(view: View) {
+        context?.let {
+            view.setOnTouchListener(object : OnSwipeTouchListener(it) {
+                override fun onSwipeTop() {
+                    super.onSwipeTop()
+                }
+
+                override fun onSwipeBottom() {
+                    super.onSwipeBottom()
+                }
+
+                override fun onSwipeLeft() {
+                    super.onSwipeLeft()
+                }
+
+                override fun onSwipeRight() {
+                    super.onSwipeRight()
+                    // return to selection screen
+                    val action = MessageDirections.actionMessageToSelection(param1!!)
+                    Navigation.findNavController(view).navigate(action)
+                }
+            })
         }
     }
 

@@ -10,18 +10,25 @@ import androidx.navigation.Navigation
 import com.mathgeniusguide.project6.dao.MoodsDao
 import com.mathgeniusguide.project6.database.AppDatabase
 import com.mathgeniusguide.project6.entity.Moods
+import com.mathgeniusguide.project6.utils.OnSwipeTouchListener
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.history.*
 import java.util.*
 
+private const val ARG_PARAM1 = "param1"
+
 class History : Fragment() {
     private var db: AppDatabase? = null
     private var moodsDao: MoodsDao? = null
+    private var param1: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getInt(ARG_PARAM1)
+        }
         db = AppDatabase.getAppDataBase(context = this.requireContext())
     }
 
@@ -45,6 +52,32 @@ class History : Fragment() {
                 historyText.text = text
             }
         })
+        setSwipeListener(view)
+    }
+
+    private fun setSwipeListener(view: View) {
+        context?.let {
+            view.setOnTouchListener(object : OnSwipeTouchListener(it) {
+                override fun onSwipeTop() {
+                    super.onSwipeTop()
+                }
+
+                override fun onSwipeBottom() {
+                    super.onSwipeBottom()
+                }
+
+                override fun onSwipeLeft() {
+                    super.onSwipeLeft()
+                }
+
+                override fun onSwipeRight() {
+                    super.onSwipeRight()
+                    // return to selection screen
+                    val action = HistoryDirections.actionHistoryToSelection(param1!!)
+                    Navigation.findNavController(view).navigate(action)
+                }
+            })
+        }
     }
 
     companion object {
@@ -52,7 +85,7 @@ class History : Fragment() {
         fun newInstance(param1: Int) =
             Message().apply {
                 arguments = Bundle().apply {
-
+                    putInt(ARG_PARAM1, param1)
                 }
             }
     }
