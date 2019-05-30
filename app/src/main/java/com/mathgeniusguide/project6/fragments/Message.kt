@@ -7,25 +7,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.mathgeniusguide.project6.dao.MoodsDao
+import com.mathgeniusguide.project6.database.AppDatabase
+import com.mathgeniusguide.project6.entity.Moods
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.message.*
+import java.util.*
 
 private const val ARG_PARAM1 = "param1"
 
 class Message : Fragment() {
     private var param1: Int? = null
+    private var db: AppDatabase? = null
+    private var moodsDao: MoodsDao? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getInt(ARG_PARAM1)
         }
+        db = AppDatabase.getAppDataBase(context = this.requireContext())
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.message, container, false)
+        val view = inflater.inflate(R.layout.message, container, false)
         return view
     }
 
@@ -66,6 +77,19 @@ class Message : Fragment() {
                 else -> MessageDirections.actionMessageToNeutral()
             }
             Navigation.findNavController(it).navigate(action)
+        }
+        save.setOnClickListener {
+            Observable.fromCallable({
+                db = AppDatabase.getAppDataBase(context = this.requireContext())
+                moodsDao = db?.moodsDao()
+
+                with(moodsDao) {
+                    this?.insertMood(Moods(Date(), param1!!, note.text.toString()))
+                }
+            }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+            back.callOnClick()
         }
     }
 

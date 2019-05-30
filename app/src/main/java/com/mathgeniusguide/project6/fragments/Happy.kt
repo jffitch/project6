@@ -28,7 +28,7 @@ class Happy : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setSwipeListener(view)
         iconCountdownTimer()
-        setNoteListener()
+        setListeners()
     }
 
     private fun setSwipeListener(view: View) {
@@ -77,11 +77,17 @@ class Happy : Fragment() {
         history.visibility = View.INVISIBLE
     }
 
-    fun setNoteListener() {
+    fun setListeners() {
         note.setOnClickListener {
             // move to message screen and cancel countdown timer
             cancelTimer()
             val action = HappyDirections.actionHappyToMessage(4)
+            Navigation.findNavController(it).navigate(action)
+        }
+        history.setOnClickListener {
+            // move to message screen and cancel countdown timer
+            cancelTimer()
+            val action = HappyDirections.actionHappyToHistory()
             Navigation.findNavController(it).navigate(action)
         }
     }

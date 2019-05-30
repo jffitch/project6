@@ -13,12 +13,22 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="265" />
-                            <option name="y" value="436" />
+                            <option name="x" value="12" />
+                            <option name="y" value="604" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_happy_to_history">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_happy_to_message">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_happy_to_neutral">
                               <value>
                                 <LayoutPositions />
@@ -34,18 +44,50 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="history">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="518" />
+                            <option name="y" value="907" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="message">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="518" />
+                            <option name="y" value="430" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_verysad_to_sad">
+                            <entry key="action_message_to_happy">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_message_to_neutral">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_message_to_sad">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_message_to_veryhappy">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_message_to_verysad">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -60,13 +102,23 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="518" />
-                            <option name="y" value="368" />
+                            <option name="x" value="265" />
+                            <option name="y" value="483" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_neutral_to_happy">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_neutral_to_history">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_neutral_to_message">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -86,12 +138,22 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="265" />
-                            <option name="y" value="46" />
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_sad_to_history">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_sad_to_message">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_sad_to_neutral">
                               <value>
                                 <LayoutPositions />
@@ -112,13 +174,23 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="436" />
+                            <option name="x" value="265" />
+                            <option name="y" value="843" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_veryhappy_to_happy">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_veryhappy_to_history">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_veryhappy_to_message">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -133,12 +205,22 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="518" />
-                            <option name="y" value="12" />
+                            <option name="x" value="265" />
+                            <option name="y" value="127" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_verysad_to_history">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_verysad_to_message">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_verysad_to_sad">
                               <value>
                                 <LayoutPositions />
