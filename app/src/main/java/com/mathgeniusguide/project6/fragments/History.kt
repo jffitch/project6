@@ -36,18 +36,15 @@ class History : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Observable.fromCallable({
-            db = AppDatabase.getAppDataBase(context = this.requireContext())
-            db?.moodsDao()?.getRecentMoods(7)
-        }).doOnNext({ list ->
-            var text = ""
-            for (i in list!!) {
-                text += "Feeling ${i.emotion} at ${i.time} because ${i.note}.\n"
+        db?.moodsDao()?.getRecentMoods(7)?.observe(viewLifecycleOwner, android.arch.lifecycle.Observer {
+            if(it != null) {
+                var text = ""
+                for(i in it) {
+                    text += "Feeling ${i.emotion} at ${i.time} because ${i.note}.\n"
+                }
+                historyText.text = text
             }
-            historyText.text = text
-        }).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+        })
     }
 
     companion object {
