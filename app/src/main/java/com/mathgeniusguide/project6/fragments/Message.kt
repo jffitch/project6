@@ -76,7 +76,7 @@ class Message : Fragment() {
         }
         save.setOnClickListener {
             Observable.fromCallable({
-                db = AppDatabase.getAppDataBase(context = this.requireContext())
+                db = AppDatabase.getAppDataBase(context!!)
                 moodsDao = db?.moodsDao()
 
                 with(moodsDao) {

@@ -3,10 +3,12 @@ package com.mathgeniusguide.project6
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.mathgeniusguide.project6.adapter.MoodAdapter
 import com.mathgeniusguide.project6.dao.MoodsDao
 import com.mathgeniusguide.project6.database.AppDatabase
 import com.mathgeniusguide.project6.entity.Moods
@@ -23,6 +25,7 @@ class History : Fragment() {
     private var db: AppDatabase? = null
     private var moodsDao: MoodsDao? = null
     private var param1: Int? = null
+    val moodList : ArrayList<Moods> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +48,12 @@ class History : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         db?.moodsDao()?.getRecentMoods(7)?.observe(viewLifecycleOwner, android.arch.lifecycle.Observer {
             if(it != null) {
-                var text = ""
-                for(i in it) {
-                    text += "Feeling ${i.emotion} at ${i.time} because ${i.note}.\n"
+                // recycler view
+                for (i in it) {
+                    moodList.add(i)
                 }
-                historyText.text = text
+                rv.layoutManager = LinearLayoutManager(context)
+                rv.adapter = MoodAdapter(moodList, context!!)
             }
         })
         setSwipeListener(view)
