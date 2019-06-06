@@ -6,7 +6,7 @@ import java.util.*
 @Entity
 data class Moods(
     @PrimaryKey
-    val time: Date,
+    val time: String,
     val emotion: Int,
     val note: String
 )

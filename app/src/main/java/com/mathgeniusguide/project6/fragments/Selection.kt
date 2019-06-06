@@ -7,8 +7,6 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.navigation.Navigation
 import com.mathgeniusguide.project6.utils.OnSwipeTouchListener
 import kotlinx.android.synthetic.main.selection.*
@@ -120,7 +118,7 @@ class Selection : Fragment() {
             5 -> R.color.veryhappy
             else -> R.color.neutral
         }
-        parent.setBackgroundColor(ContextCompat.getColor(context!!, clr))
+        parent.setBackgroundResource(clr)
         var img = when (param1) {
             1 -> R.drawable.smiley_verysad
             2 -> R.drawable.smiley_sad

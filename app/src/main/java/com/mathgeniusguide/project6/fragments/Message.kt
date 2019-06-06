@@ -15,6 +15,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.message.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 private const val ARG_PARAM1 = "param1"
@@ -65,22 +66,25 @@ class Message : Fragment() {
             5 -> R.color.veryhappy
             else -> R.color.neutral
         }
-        parent.setBackgroundColor(ContextCompat.getColor(context!!, clr))
+        parent.setBackgroundResource(clr)
     }
 
     fun setListeners() {
-        // Go back to the previous screen.
         back.setOnClickListener {
+            // go back to previous screen
             val action = MessageDirections.actionMessageToSelection(param1!!)
             Navigation.findNavController(it).navigate(action)
         }
         save.setOnClickListener {
+            // save emotion and comment in database and go back to previous screen
             Observable.fromCallable({
                 db = AppDatabase.getAppDataBase(context!!)
                 moodsDao = db?.moodsDao()
+                val sdf = SimpleDateFormat("yyyy/MM/dd")
+                val date = sdf.format(Date())
 
                 with(moodsDao) {
-                    this?.insertMood(Moods(Date(), param1!!, note.text.toString()))
+                    this?.insertMood(Moods(date, param1!!, note.text.toString()))
                 }
             }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

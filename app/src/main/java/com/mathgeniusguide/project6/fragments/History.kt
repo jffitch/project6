@@ -2,7 +2,6 @@ package com.mathgeniusguide.project6
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +12,6 @@ import com.mathgeniusguide.project6.dao.MoodsDao
 import com.mathgeniusguide.project6.database.AppDatabase
 import com.mathgeniusguide.project6.entity.Moods
 import com.mathgeniusguide.project6.utils.OnSwipeTouchListener
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.history.*
 import java.util.*
 
@@ -32,7 +28,7 @@ class History : Fragment() {
         arguments?.let {
             param1 = it.getInt(ARG_PARAM1)
         }
-        db = AppDatabase.getAppDataBase(context = this.requireContext())
+        db = AppDatabase.getAppDataBase(context!!)
     }
 
     override fun onCreateView(
@@ -48,15 +44,16 @@ class History : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         db?.moodsDao()?.getRecentMoods(7)?.observe(viewLifecycleOwner, android.arch.lifecycle.Observer {
             if(it != null) {
-                // recycler view
+                // Recycler View
+                // add each line from database to array list, then set up layout manager and adapter
                 for (i in it) {
                     moodList.add(i)
                 }
                 rv.layoutManager = LinearLayoutManager(context)
                 rv.adapter = MoodAdapter(moodList, context!!)
             }
+            setSwipeListener(view)
         })
-        setSwipeListener(view)
     }
 
     private fun setSwipeListener(view: View) {
