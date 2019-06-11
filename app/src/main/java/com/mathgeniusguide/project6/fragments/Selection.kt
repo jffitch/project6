@@ -22,6 +22,7 @@ class Selection : Fragment() {
         arguments?.let {
             param1 = it.getInt(ARG_PARAM1)
         }
+        activity?.setTitle(resources.getString(R.string.title))
     }
 
     override fun onCreateView(

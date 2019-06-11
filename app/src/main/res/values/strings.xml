@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">Project 6</string>
+    <string name="app_name">Mood Tracker</string>
+
+    <!--Emotions-->
+    <string name="very_happy">very happy</string>
+    <string name="happy">happy</string>
+    <string name="neutral">neutral</string>
+    <string name="sad">sad</string>
+    <string name="very_sad">very sad</string>
+    <string name="emotion_string">Why are you feeling %1$s today?</string>
+
+    <!--Buttons-->
+    <string name="save">SAVE</string>
+    <string name="back">BACK</string>
+
+    <!--Titles-->
+    <string name="title">Mood Tracker</string>
+    <string name="title_note">Save Mood With Note</string>
+    <string name="title_history">Mood History</string>
 </resources>

@@ -29,6 +29,7 @@ class History : Fragment() {
             param1 = it.getInt(ARG_PARAM1)
         }
         db = AppDatabase.getAppDataBase(context!!)
+        activity?.setTitle(resources.getString(R.string.title_history))
     }
 
     override fun onCreateView(
@@ -52,7 +53,7 @@ class History : Fragment() {
                 rv.layoutManager = LinearLayoutManager(context)
                 rv.adapter = MoodAdapter(moodList, context!!)
             }
-            setSwipeListener(view)
+            setSwipeListener(rv)
         })
     }
 

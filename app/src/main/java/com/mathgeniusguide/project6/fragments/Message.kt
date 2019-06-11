@@ -31,6 +31,7 @@ class Message : Fragment() {
             param1 = it.getInt(ARG_PARAM1)
         }
         db = AppDatabase.getAppDataBase(context = this.requireContext())
+        activity?.setTitle(resources.getString(R.string.title_note))
     }
 
     override fun onCreateView(
@@ -52,13 +53,13 @@ class Message : Fragment() {
     fun setEmotionText() {
         // Set the text in "Why are you feeling ___ today?" and the background color based on the selected emotion.
         var emtn = when (param1) {
-            1 -> "very sad"
-            2 -> "sad"
-            4 -> "happy"
-            5 -> "very happy"
-            else -> "neutral"
+            1 -> R.string.very_sad
+            2 -> R.string.sad
+            4 -> R.string.happy
+            5 -> R.string.very_happy
+            else -> R.string.neutral
         }
-        emotion.text = "Why are you feeling $emtn today?"
+        emotion.text = String.format(resources.getString(R.string.emotion_string), resources.getString(emtn))
         var clr = when (param1) {
             1 -> R.color.verysad
             2 -> R.color.sad
