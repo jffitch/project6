@@ -1,7 +1,7 @@
 package com.mathgeniusguide.project6.database
 
 import android.content.Context
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.mathgeniusguide.project6.dao.MoodsDao
 import com.mathgeniusguide.project6.entity.Moods
 

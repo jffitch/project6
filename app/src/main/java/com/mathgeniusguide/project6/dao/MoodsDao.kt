@@ -1,7 +1,7 @@
 package com.mathgeniusguide.project6.dao
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.mathgeniusguide.project6.entity.Moods
 
 @Dao
@@ -17,4 +17,7 @@ interface MoodsDao{
 
     @Query("select * from Moods order by time desc limit :limit")
     fun getRecentMoods(limit: Int): LiveData<List<Moods>>
+
+    @Query("select * from Moods order by time desc limit 1")
+    fun getOneMood(): Moods
 }

@@ -1,6 +1,6 @@
 package com.mathgeniusguide.project6.entity
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import java.util.*
 
 @Entity

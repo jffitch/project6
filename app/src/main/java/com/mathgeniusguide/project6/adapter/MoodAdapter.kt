@@ -2,13 +2,13 @@ package com.mathgeniusguide.project6.adapter
 
 import android.app.Activity
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.mathgeniusguide.project6.entity.Moods
 import kotlinx.android.synthetic.main.saved_mood.view.*
 import com.mathgeniusguide.project6.R

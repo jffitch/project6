@@ -1,12 +1,12 @@
 package com.mathgeniusguide.project6
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mathgeniusguide.project6.adapter.MoodAdapter
 import com.mathgeniusguide.project6.dao.MoodsDao
 import com.mathgeniusguide.project6.database.AppDatabase
@@ -43,7 +43,7 @@ class History : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        db?.moodsDao()?.getRecentMoods(7)?.observe(viewLifecycleOwner, android.arch.lifecycle.Observer {
+        db?.moodsDao()?.getRecentMoods(7)?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if(it != null) {
                 // Recycler View
                 // add each line from database to array list, then set up layout manager and adapter
