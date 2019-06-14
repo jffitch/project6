@@ -9,6 +9,9 @@ interface MoodsDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMood(mood: Moods)
 
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    fun insertMoodIfNotExists(mood: Moods)
+
     @Update
     fun updateMood(mood: Moods)
 
