@@ -20,7 +20,7 @@ class MoodWorker(context: Context, workerParams: WorkerParameters) : Worker (con
         moodsDao = db?.moodsDao()
 
         var oneMood = db?.moodsDao()?.getOneMood()
-        val sdf = SimpleDateFormat("yyyy/MM/dd")
+        val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
         val date = sdf.format(Date())
 
         with(moodsDao) {

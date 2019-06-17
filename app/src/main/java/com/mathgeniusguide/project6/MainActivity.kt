@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         val delay =
             (SECONDS_IN_DAY + 10 * SECONDS_IN_MINUTE - time[0].toInt() * SECONDS_IN_HOUR - time[1].toInt() * SECONDS_IN_MINUTE - time[2].toInt()).toLong()
 
-        if (delay < SECONDS_IN_DAY) {
             val constraints = Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
                 .build()
@@ -31,8 +30,8 @@ class MainActivity : AppCompatActivity() {
                 .setInitialDelay(delay, TimeUnit.SECONDS)
                 .build()
             WorkManager.getInstance(this)
-                .enqueueUniquePeriodicWork("dailyUpdate", ExistingPeriodicWorkPolicy.REPLACE, work)
+                .enqueueUniquePeriodicWork("dailyUpdate", if (time[0].toInt() < 6) ExistingPeriodicWorkPolicy.KEEP else ExistingPeriodicWorkPolicy.REPLACE, work)
             Toast.makeText(this, "Time recorded as ${time}.\nDelay set to ${delay}.", Toast.LENGTH_LONG).show()
-        }
+
     }
 }
