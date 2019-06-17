@@ -47,9 +47,7 @@ class History : Fragment() {
             if(it != null) {
                 // Recycler View
                 // add each line from database to array list, then set up layout manager and adapter
-                for (i in it) {
-                    moodList.add(i)
-                }
+                moodList.addAll(it)
                 rv.layoutManager = LinearLayoutManager(context)
                 rv.adapter = MoodAdapter(moodList, context!!)
             }
