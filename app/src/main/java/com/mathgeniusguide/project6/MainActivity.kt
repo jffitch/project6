@@ -33,6 +33,5 @@ class MainActivity : AppCompatActivity() {
             .build()
         WorkManager.getInstance(this)
             .enqueueUniqueWork(date, ExistingWorkPolicy.KEEP, work)
-        Toast.makeText(this, "Time recorded as ${time}.\nDelay set to ${delay}.", Toast.LENGTH_LONG).show()
     }
 }
