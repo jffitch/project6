@@ -23,4 +23,7 @@ interface MoodsDao{
 
     @Query("select * from Moods order by time desc limit 1")
     fun getOneMood(): Moods
+
+    @Query("select * from Moods where time = :date")
+    fun getDateMood(date: String): Moods
 }
