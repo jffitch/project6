@@ -10,8 +10,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun moodsDao(): MoodsDao
 
     companion object {
+        private var INSTANCE: AppDatabase? = null
         var TEST_MODE = false
-        var INSTANCE: AppDatabase? = null
 
         fun getAppDataBase(context: Context): AppDatabase? {
             if (INSTANCE == null) {

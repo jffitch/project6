@@ -1,4 +1,4 @@
-package com.mathgeniusguide.project6
+package com.mathgeniusguide.project6.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ import com.mathgeniusguide.project6.entity.Moods
 import com.mathgeniusguide.project6.utils.OnSwipeTouchListener
 import kotlinx.android.synthetic.main.history.*
 import java.util.*
+import com.mathgeniusguide.project6.R
 
 private const val ARG_PARAM1 = "param1"
 
@@ -21,7 +22,7 @@ class History : Fragment() {
     private var db: AppDatabase? = null
     private var moodsDao: MoodsDao? = null
     private var param1: Int? = null
-    val moodList : ArrayList<Moods> = ArrayList()
+    private val moodList : ArrayList<Moods> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,8 @@ class History : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        db?.moodsDao()?.getRecentMoods(7)?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        moodsDao = db?.moodsDao()
+        moodsDao?.getRecentMoods(7)?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if(it != null) {
                 // Recycler View
                 // add each line from database to array list, then set up layout manager and adapter
@@ -58,18 +60,6 @@ class History : Fragment() {
     private fun setSwipeListener(view: View) {
         context?.let {
             view.setOnTouchListener(object : OnSwipeTouchListener(it) {
-                override fun onSwipeTop() {
-                    super.onSwipeTop()
-                }
-
-                override fun onSwipeBottom() {
-                    super.onSwipeBottom()
-                }
-
-                override fun onSwipeLeft() {
-                    super.onSwipeLeft()
-                }
-
                 override fun onSwipeRight() {
                     super.onSwipeRight()
                     // return to selection screen
@@ -78,15 +68,5 @@ class History : Fragment() {
                 }
             })
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: Int) =
-            Message().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_PARAM1, param1)
-                }
-            }
     }
 }

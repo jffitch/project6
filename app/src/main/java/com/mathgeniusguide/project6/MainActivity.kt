@@ -1,7 +1,6 @@
 package com.mathgeniusguide.project6
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.*
 import com.mathgeniusguide.project6.work.MoodWorker
@@ -14,9 +13,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var sdf = SimpleDateFormat("yyyy/MM/dd")
+        var sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
         val date = sdf.format(Date())
-        sdf = SimpleDateFormat("HH:mm:ss")
+        sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         val time = sdf.format(Date()).split(":")
         val SECONDS_IN_MINUTE = 60
         val SECONDS_IN_HOUR = 3600

@@ -15,7 +15,7 @@ import com.mathgeniusguide.project6.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MoodAdapter (val items: ArrayList<Moods>, val context: Context) : RecyclerView.Adapter<MoodAdapter.ViewHolder> () {
+class MoodAdapter (private val items: ArrayList<Moods>, val context: Context) : RecyclerView.Adapter<MoodAdapter.ViewHolder> () {
     private var screenWidth = 0
     private var screenHeight = 0
 
@@ -36,17 +36,17 @@ class MoodAdapter (val items: ArrayList<Moods>, val context: Context) : Recycler
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // code here controls what's done to the views for each group
-        var pos = items.get(position)
+        val pos = items[position]
         // set date TextView to date in database
-        val sdf = SimpleDateFormat("yyyy/MM/dd")
+        val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
         val diff = dateDiff(pos.time, sdf.format(Date()))
         holder.date.text = when (diff) {
-            0 -> "today"
-            1 -> "yesterday"
-            else -> "${diff} days ago"
+            0 -> context.resources.getString(R.string.today)
+            1 -> context.resources.getString(R.string.yesterday)
+            else -> String.format(context.resources.getString(R.string.days_ago), diff)
         }
         // set background color to match emotion in database
-        var clr = when (pos.emotion) {
+        val clr = when (pos.emotion) {
             1 -> R.color.verysad
             2 -> R.color.sad
             4 -> R.color.happy
@@ -67,9 +67,9 @@ class MoodAdapter (val items: ArrayList<Moods>, val context: Context) : Recycler
         }
     }
 
-    fun dateDiff(date1: String, date2: String) : Int {
+    private fun dateDiff(date1: String, date2: String) : Int {
         val MILLISECONDS_IN_DAY = 86400000
-        val sdf = SimpleDateFormat("yyyy/MM/dd")
+        val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
         val d1 = sdf.parse(date1)
         val d2 = sdf.parse(date2)
         return ((Math.abs(d1.time - d2.time)) / MILLISECONDS_IN_DAY).toInt()

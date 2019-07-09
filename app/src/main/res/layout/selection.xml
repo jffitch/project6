@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/veryhappy"
-        tools:context=".Selection"
+        tools:context=".fragments.Selection"
         android:id="@+id/parent">
 
     <ImageView android:layout_width="wrap_content"
@@ -18,8 +18,8 @@
                app:layout_constraintStart_toStartOf="parent"
                android:id="@+id/smiley"/>
 
-    <ImageView android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+    <ImageView android:layout_width="48dp"
+               android:layout_height="48dp"
                android:id="@+id/note"
                android:src="@drawable/ic_note_add_black"
                app:layout_constraintBottom_toBottomOf="parent"
@@ -28,11 +28,21 @@
                android:paddingLeft="15dp"
                android:visibility="invisible"/>
 
-    <ImageView android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+    <ImageView android:layout_width="48dp"
+               android:layout_height="48dp"
                android:id="@+id/history"
                android:src="@drawable/ic_history_black"
                app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               android:paddingBottom="15dp"
+               android:paddingRight="15dp"
+               android:visibility="invisible"/>
+
+    <ImageView android:layout_width="48dp"
+               android:layout_height="48dp"
+               android:id="@+id/pie"
+               android:src="@drawable/ic_pie"
+               app:layout_constraintBottom_toTopOf="@id/history"
                app:layout_constraintEnd_toEndOf="parent"
                android:paddingBottom="15dp"
                android:paddingRight="15dp"

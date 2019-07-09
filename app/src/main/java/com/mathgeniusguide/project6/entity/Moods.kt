@@ -1,7 +1,6 @@
 package com.mathgeniusguide.project6.entity
 
 import androidx.room.*
-import java.util.*
 
 @Entity
 data class Moods(

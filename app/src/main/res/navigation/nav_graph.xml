@@ -4,7 +4,7 @@
             android:id="@+id/nav_graph" app:startDestination="@id/selection">
 
     <fragment android:id="@+id/selection"
-              android:name="com.mathgeniusguide.project6.Selection"
+              android:name="com.mathgeniusguide.project6.fragments.Selection"
               android:label="Selection"
               tools:layout="@layout/selection">
         <action android:id="@+id/action_selection_happier"
@@ -23,12 +23,16 @@
                 app:destination="@id/history"
                 app:enterAnim="@anim/push_left_in"
                 app:exitAnim="@anim/push_left_out"/>
+        <action android:id="@+id/action_selection_to_piechart"
+                app:destination="@id/piechart"
+                app:enterAnim="@anim/push_left_in"
+                app:exitAnim="@anim/push_left_out"/>
         <argument android:name="param1"
                   app:argType="integer"
                   android:defaultValue="5"/>
     </fragment>
     <fragment android:id="@+id/message"
-              android:name="com.mathgeniusguide.project6.Message"
+              android:name="com.mathgeniusguide.project6.fragments.Message"
               android:label="Message"
               tools:layout="@layout/message">
         <action android:id="@+id/action_message_to_selection"
@@ -40,10 +44,22 @@
                   android:defaultValue="5"/>
     </fragment>
     <fragment android:id="@+id/history"
-              android:name="com.mathgeniusguide.project6.History"
+              android:name="com.mathgeniusguide.project6.fragments.History"
               android:label="History"
               tools:layout="@layout/history">
         <action android:id="@+id/action_history_to_selection"
+                app:destination="@id/selection"
+                app:enterAnim="@anim/push_right_in"
+                app:exitAnim="@anim/push_right_out"/>
+        <argument android:name="param1"
+                  app:argType="integer"
+                  android:defaultValue="5"/>
+    </fragment>
+    <fragment android:id="@+id/piechart"
+              android:name="com.mathgeniusguide.project6.fragments.PieChart"
+              android:label="PieChart"
+              tools:layout="@layout/piechart">
+        <action android:id="@+id/action_piechart_to_selection"
                 app:destination="@id/selection"
                 app:enterAnim="@anim/push_right_in"
                 app:exitAnim="@anim/push_right_out"/>

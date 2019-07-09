@@ -10,6 +10,10 @@
     <string name="emotion_string">Why are you feeling %1$s today?</string>
     <string name="carried_over">Carried over from previous day.</string>
 
+    <string name="today">today</string>
+    <string name="yesterday">yesterday</string>
+    <string name="days_ago">%1$d days ago</string>
+
     <!--Buttons-->
     <string name="save">SAVE</string>
     <string name="back">BACK</string>
@@ -18,4 +22,5 @@
     <string name="title">Mood Tracker</string>
     <string name="title_note">Save Mood With Note</string>
     <string name="title_history">Mood History</string>
+    <string name="title_piechart">Mood Distribution</string>
 </resources>

@@ -18,15 +18,15 @@ class MoodWorker(context: Context, workerParams: WorkerParameters) : Worker (con
         db = AppDatabase.getAppDataBase(applicationContext)
         moodsDao = db?.moodsDao()
 
-        var oneMood = db?.moodsDao()?.getOneMood()
-        var sdf = SimpleDateFormat("yyyy/MM/dd")
+        val oneMood = db?.moodsDao()?.getOneMood()
+        var sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
         val date = sdf.format(Date())
 
         with(moodsDao) {
             this?.insertMoodIfNotExists(Moods(date, oneMood!!.emotion, applicationContext.getString(R.string.carried_over)))
         }
 
-        sdf = SimpleDateFormat("HH:mm:ss")
+        sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         val time = sdf.format(Date()).split(":")
         val SECONDS_IN_MINUTE = 60
         val SECONDS_IN_HOUR = 3600

@@ -1,15 +1,18 @@
-package com.mathgeniusguide.project6
+package com.mathgeniusguide.project6.database
 
-import com.mathgeniusguide.project6.entity.Moods
-import org.junit.*
-import org.junit.runner.RunWith
-import androidx.test.runner.AndroidJUnit4
-import com.mathgeniusguide.project6.database.AppDatabase
 import androidx.test.InstrumentationRegistry
 import com.mathgeniusguide.project6.dao.MoodsDao
+import com.mathgeniusguide.project6.entity.Moods
+import org.junit.After
+import org.junit.Assert
+import org.junit.Assert.*
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
-@RunWith(AndroidJUnit4::class)
-class DatabaseTest {
+@RunWith(JUnit4::class)
+class AppDatabaseTest {
     private var moodsDao: MoodsDao? = null
 
     @Before

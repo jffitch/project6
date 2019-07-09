@@ -1,4 +1,4 @@
-package com.mathgeniusguide.project6
+package com.mathgeniusguide.project6.fragments
 
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -9,12 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.mathgeniusguide.project6.utils.OnSwipeTouchListener
 import kotlinx.android.synthetic.main.selection.*
+import com.mathgeniusguide.project6.R
 
 private const val ARG_PARAM1 = "param1"
 
 class Selection : Fragment() {
     private var param1: Int = 5
-    lateinit var timer: CountDownTimer
+    private lateinit var timer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +54,6 @@ class Selection : Fragment() {
                         Navigation.findNavController(view).navigate(action)
                     }
                 }
-
                 override fun onSwipeBottom() {
                     super.onSwipeBottom()
                     // if not very happy, move to happier emotion and cancel countdown timer
@@ -63,19 +63,11 @@ class Selection : Fragment() {
                         Navigation.findNavController(view).navigate(action)
                     }
                 }
-
-                override fun onSwipeLeft() {
-                    super.onSwipeLeft()
-                }
-
-                override fun onSwipeRight() {
-                    super.onSwipeRight()
-                }
             })
         }
     }
 
-    fun iconCountdownTimer() {
+    private fun iconCountdownTimer() {
         timer = object : CountDownTimer(1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
@@ -84,18 +76,20 @@ class Selection : Fragment() {
             override fun onFinish() {
                 note.visibility = View.VISIBLE
                 history.visibility = View.VISIBLE
+                pie.visibility = View.VISIBLE
             }
         }
         timer.start()
     }
 
-    fun cancelTimer() {
+    private fun cancelTimer() {
         timer.cancel()
         note.visibility = View.INVISIBLE
         history.visibility = View.INVISIBLE
+        pie.visibility = View.INVISIBLE
     }
 
-    fun setListeners() {
+    private fun setListeners() {
         note.setOnClickListener {
             // move to message screen and cancel countdown timer
             cancelTimer()
@@ -108,10 +102,16 @@ class Selection : Fragment() {
             val action = SelectionDirections.actionSelectionToHistory(param1)
             Navigation.findNavController(it).navigate(action)
         }
+        pie.setOnClickListener {
+            // move to message screen and cancel countdown timer
+            cancelTimer()
+            val action = SelectionDirections.actionSelectionToPiechart(param1)
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
-    fun setDisplay() {
-        var clr = when (param1) {
+    private fun setDisplay() {
+        val clr = when (param1) {
             1 -> R.color.verysad
             2 -> R.color.sad
             4 -> R.color.happy
@@ -119,7 +119,7 @@ class Selection : Fragment() {
             else -> R.color.neutral
         }
         parent.setBackgroundResource(clr)
-        var img = when (param1) {
+        val img = when (param1) {
             1 -> R.drawable.smiley_verysad
             2 -> R.drawable.smiley_sad
             4 -> R.drawable.smiley_happy
@@ -127,15 +127,5 @@ class Selection : Fragment() {
             else -> R.drawable.smiley_neutral
         }
         smiley.setImageResource(img)
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: Int) =
-            Selection().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_PARAM1, param1)
-                }
-            }
     }
 }

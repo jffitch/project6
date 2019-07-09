@@ -1,4 +1,4 @@
-package com.mathgeniusguide.project6
+package com.mathgeniusguide.project6.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.message.*
 import java.text.SimpleDateFormat
 import java.util.*
+import com.mathgeniusguide.project6.R
 
 private const val ARG_PARAM1 = "param1"
 
@@ -49,9 +50,9 @@ class Message : Fragment() {
         setSwipeListener(view)
     }
 
-    fun setEmotionText() {
+    private fun setEmotionText() {
         // Set the text in "Why are you feeling ___ today?" and the background color based on the selected emotion.
-        var emtn = when (param1) {
+        val emtn = when (param1) {
             1 -> R.string.very_sad
             2 -> R.string.sad
             4 -> R.string.happy
@@ -59,7 +60,7 @@ class Message : Fragment() {
             else -> R.string.neutral
         }
         emotion.text = String.format(resources.getString(R.string.emotion_string), resources.getString(emtn))
-        var clr = when (param1) {
+        val clr = when (param1) {
             1 -> R.color.verysad
             2 -> R.color.sad
             4 -> R.color.happy
@@ -69,7 +70,7 @@ class Message : Fragment() {
         parent.setBackgroundResource(clr)
     }
 
-    fun setListeners() {
+    private fun setListeners() {
         back.setOnClickListener {
             // go back to previous screen
             val action = MessageDirections.actionMessageToSelection(param1!!)
@@ -80,7 +81,7 @@ class Message : Fragment() {
             Observable.fromCallable({
                 db = AppDatabase.getAppDataBase(context!!)
                 moodsDao = db?.moodsDao()
-                val sdf = SimpleDateFormat("yyyy/MM/dd")
+                val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
                 val date = sdf.format(Date())
 
                 with(moodsDao) {
@@ -96,18 +97,6 @@ class Message : Fragment() {
     private fun setSwipeListener(view: View) {
         context?.let {
             view.setOnTouchListener(object : OnSwipeTouchListener(it) {
-                override fun onSwipeTop() {
-                    super.onSwipeTop()
-                }
-
-                override fun onSwipeBottom() {
-                    super.onSwipeBottom()
-                }
-
-                override fun onSwipeLeft() {
-                    super.onSwipeLeft()
-                }
-
                 override fun onSwipeRight() {
                     super.onSwipeRight()
                     // return to selection screen
@@ -116,15 +105,5 @@ class Message : Fragment() {
                 }
             })
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: Int) =
-            Message().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_PARAM1, param1)
-                }
-            }
     }
 }

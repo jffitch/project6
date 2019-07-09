@@ -9,7 +9,7 @@ interface MoodsDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMood(mood: Moods)
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertMoodIfNotExists(mood: Moods)
 
     @Update
@@ -20,6 +20,9 @@ interface MoodsDao{
 
     @Query("select * from Moods order by time desc limit :limit")
     fun getRecentMoods(limit: Int): LiveData<List<Moods>>
+
+    @Query("select * from Moods order by time desc")
+    fun getAllMoods(): LiveData<List<Moods>>
 
     @Query("select * from Moods order by time desc limit 1")
     fun getOneMood(): Moods
