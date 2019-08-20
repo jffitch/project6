@@ -15,7 +15,7 @@ import com.mathgeniusguide.project6.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MoodAdapter (private val items: ArrayList<Moods>, val context: Context) : RecyclerView.Adapter<MoodAdapter.ViewHolder> () {
+class MoodsAdapter (private val items: ArrayList<Moods>, val context: Context) : RecyclerView.Adapter<MoodsAdapter.ViewHolder> () {
     private var screenWidth = 0
     private var screenHeight = 0
 

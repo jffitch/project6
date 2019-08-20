@@ -7,11 +7,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.mathgeniusguide.project6.adapter.MoodAdapter
 import com.mathgeniusguide.project6.dao.MoodsDao
-import com.mathgeniusguide.project6.database.AppDatabase
-import com.mathgeniusguide.project6.entity.Moods
+import com.mathgeniusguide.project6.database.MoodsDatabase
 import com.mathgeniusguide.project6.utils.OnSwipeTouchListener
 import java.util.*
 import com.mathgeniusguide.project6.R
@@ -22,7 +19,7 @@ import lecho.lib.hellocharts.model.SliceValue
 private const val ARG_PARAM1 = "param1"
 
 class PieChart : Fragment() {
-    private var db: AppDatabase? = null
+    private var db: MoodsDatabase? = null
     private var moodsDao: MoodsDao? = null
     private var param1: Int? = null
     // distribution of occurrences of each of the five emotions, initialized to 0
@@ -33,7 +30,7 @@ class PieChart : Fragment() {
         arguments?.let {
             param1 = it.getInt(ARG_PARAM1)
         }
-        db = AppDatabase.getAppDataBase(context!!)
+        db = MoodsDatabase.getDataBase(context!!)
         activity?.setTitle(resources.getString(R.string.title_piechart))
     }
 

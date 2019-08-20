@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mathgeniusguide.project6.adapter.MoodAdapter
+import com.mathgeniusguide.project6.adapter.MoodsAdapter
 import com.mathgeniusguide.project6.dao.MoodsDao
-import com.mathgeniusguide.project6.database.AppDatabase
+import com.mathgeniusguide.project6.database.MoodsDatabase
 import com.mathgeniusguide.project6.entity.Moods
 import com.mathgeniusguide.project6.utils.OnSwipeTouchListener
 import kotlinx.android.synthetic.main.history.*
@@ -19,7 +19,7 @@ import com.mathgeniusguide.project6.R
 private const val ARG_PARAM1 = "param1"
 
 class History : Fragment() {
-    private var db: AppDatabase? = null
+    private var db: MoodsDatabase? = null
     private var moodsDao: MoodsDao? = null
     private var param1: Int? = null
     private val moodList : ArrayList<Moods> = ArrayList()
@@ -29,7 +29,7 @@ class History : Fragment() {
         arguments?.let {
             param1 = it.getInt(ARG_PARAM1)
         }
-        db = AppDatabase.getAppDataBase(context!!)
+        db = MoodsDatabase.getDataBase(context!!)
         activity?.setTitle(resources.getString(R.string.title_history))
     }
 
@@ -51,7 +51,7 @@ class History : Fragment() {
                 // add each line from database to array list, then set up layout manager and adapter
                 moodList.addAll(it)
                 rv.layoutManager = LinearLayoutManager(context)
-                rv.adapter = MoodAdapter(moodList, context!!)
+                rv.adapter = MoodsAdapter(moodList, context!!)
             }
             setSwipeListener(rv)
         })

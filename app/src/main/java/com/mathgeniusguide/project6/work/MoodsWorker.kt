@@ -4,18 +4,18 @@ import android.content.Context
 import androidx.work.*
 import com.mathgeniusguide.project6.R
 import com.mathgeniusguide.project6.dao.MoodsDao
-import com.mathgeniusguide.project6.database.AppDatabase
+import com.mathgeniusguide.project6.database.MoodsDatabase
 import com.mathgeniusguide.project6.entity.Moods
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class MoodWorker(context: Context, workerParams: WorkerParameters) : Worker (context, workerParams) {
-    private var db: AppDatabase? = null
+class MoodsWorker(context: Context, workerParams: WorkerParameters) : Worker (context, workerParams) {
+    private var db: MoodsDatabase? = null
     private var moodsDao: MoodsDao? = null
 
     override fun doWork() : Result {
-        db = AppDatabase.getAppDataBase(applicationContext)
+        db = MoodsDatabase.getDataBase(applicationContext)
         moodsDao = db?.moodsDao()
 
         val oneMood = db?.moodsDao()?.getOneMood()
@@ -37,7 +37,7 @@ class MoodWorker(context: Context, workerParams: WorkerParameters) : Worker (con
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
             .build()
-        val work = OneTimeWorkRequestBuilder<MoodWorker>()
+        val work = OneTimeWorkRequestBuilder<MoodsWorker>()
             .setConstraints(constraints)
             .setInitialDelay(delay, TimeUnit.SECONDS)
             .build()

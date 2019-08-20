@@ -5,20 +5,19 @@ import com.mathgeniusguide.project6.dao.MoodsDao
 import com.mathgeniusguide.project6.entity.Moods
 import org.junit.After
 import org.junit.Assert
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class AppDatabaseTest {
+class MoodsDatabaseTest {
     private var moodsDao: MoodsDao? = null
 
     @Before
     fun setup() {
-        AppDatabase.TEST_MODE = true
-        moodsDao = AppDatabase.getAppDataBase(InstrumentationRegistry.getTargetContext())?.moodsDao()
+        MoodsDatabase.TEST_MODE = true
+        moodsDao = MoodsDatabase.getDataBase(InstrumentationRegistry.getTargetContext())?.moodsDao()
     }
 
     @After

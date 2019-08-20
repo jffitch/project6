@@ -3,7 +3,7 @@ package com.mathgeniusguide.project6
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.*
-import com.mathgeniusguide.project6.work.MoodWorker
+import com.mathgeniusguide.project6.work.MoodsWorker
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         val constraints = Constraints.Builder()
             .setRequiresBatteryNotLow(true)
             .build()
-        val work = OneTimeWorkRequestBuilder<MoodWorker>()
+        val work = OneTimeWorkRequestBuilder<MoodsWorker>()
             .setConstraints(constraints)
             .setInitialDelay(delay, TimeUnit.SECONDS)
             .build()

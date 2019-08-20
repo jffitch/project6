@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.mathgeniusguide.project6.dao.MoodsDao
-import com.mathgeniusguide.project6.database.AppDatabase
+import com.mathgeniusguide.project6.database.MoodsDatabase
 import com.mathgeniusguide.project6.entity.Moods
 import com.mathgeniusguide.project6.utils.OnSwipeTouchListener
 import io.reactivex.Observable
@@ -17,12 +17,13 @@ import kotlinx.android.synthetic.main.message.*
 import java.text.SimpleDateFormat
 import java.util.*
 import com.mathgeniusguide.project6.R
+import java.text.ParseException
 
 private const val ARG_PARAM1 = "param1"
 
 class Message : Fragment() {
     private var param1: Int? = null
-    private var db: AppDatabase? = null
+    private var db: MoodsDatabase? = null
     private var moodsDao: MoodsDao? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,7 @@ class Message : Fragment() {
         arguments?.let {
             param1 = it.getInt(ARG_PARAM1)
         }
-        db = AppDatabase.getAppDataBase(context = this.requireContext())
+        db = MoodsDatabase.getDataBase(context = this.requireContext())
         activity?.setTitle(resources.getString(R.string.title_note))
     }
 
@@ -77,12 +78,12 @@ class Message : Fragment() {
             Navigation.findNavController(it).navigate(action)
         }
         save.setOnClickListener {
+            // use entered date if valid, use today's date if no date or invalid date entered
+            val date = validDate(dateBox.text.toString())
             // save emotion and comment in database and go back to previous screen
             Observable.fromCallable({
-                db = AppDatabase.getAppDataBase(context!!)
+                db = MoodsDatabase.getDataBase(context!!)
                 moodsDao = db?.moodsDao()
-                val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
-                val date = sdf.format(Date())
 
                 with(moodsDao) {
                     this?.insertMood(Moods(date, param1!!, note.text.toString()))
@@ -92,6 +93,33 @@ class Message : Fragment() {
                 .subscribe()
             back.callOnClick()
         }
+        calendar.setOnClickListener {
+            // remove the Calendar icon and show the field to enter the date
+            calendar.visibility = View.GONE
+            dateLabel.visibility = View.VISIBLE
+            dateBox.visibility = View.VISIBLE
+        }
+    }
+
+    private fun validDate(date: String): String {
+        val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+        sdf.isLenient = false
+        val todayDate = Date()
+        val today = sdf.format(todayDate)
+        // if date is not parseable, return today
+        try {
+            sdf.parse(date)
+        }
+        catch (e: ParseException){
+            return today
+        }
+        // if date is future, return today
+        if (sdf.parse(date).after(todayDate)) {
+            return today
+        }
+        // if date is real and past, return date
+        // convert to date then back to string in order to insert leading 0s, because dates without leading 0s will not order properly
+        return sdf.format(sdf.parse(date))
     }
 
     private fun setSwipeListener(view: View) {
